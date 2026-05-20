@@ -1,4 +1,4 @@
-#### BASE INSTALLATION
+#### Cribl BASE INSTALLATION
 
 apt update
 
@@ -10,7 +10,8 @@ chown -R cribl. /opt/cribl
 /opt/cribl/bin/cribl boot-start enable -m systemd -u cribl
 su - cribl -c '/opt/cribl/bin/cribl start'
 
+## QoL alias
 echo -e "alias cribl=' /opt/cribl/bin/cribl'" >> /root/.bashrc
 source /root/.bashrc
 
-timedatectl set-timezone Europe/Berlin
+

@@ -1,0 +1,20 @@
+# Cribl MCP setup 
+https://docs.cribl.io/copilot/cribl-mcp-server/
+
+## .env variables needed
+# (unfortunately the docs aren't very helpful for on-prem...
+# after much troubleshooting, I found the correct variable MODE)
+
+CRIBL_BASE_URL=http://<cribl_leader>:9000
+MODE=on-prem
+CRIBL_USERNAME=<admin_user>
+CRIBL_PASSWORD=<admin_password>
+
+
+## create container and keep it running
+docker run -d \
+  --restart unless-stopped \
+  --name cribl-mcp \
+  -p 3030:3030 \
+  --env-file .env \
+  cribl/cribl-mcp-server

@@ -1,3 +1,3 @@
 # PlayAroundIT-splunk-mcp-auditd
 
-/Users/stevenyoungkin/Library/Application Support/Claude
+/users/.../Library/Application Support/Claude

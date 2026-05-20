@@ -1,0 +1,36 @@
+ENV["VAGRANT_DEFAULT_PROVIDER"] = "vmware_desktop"
+
+Vagrant.require_version ">= 2.3.0"
+
+BOX_IMAGE = "bento/ubuntu-22.04"
+
+Vagrant.configure("2") do |config|
+  config.vm.box = BOX_IMAGE
+
+  config.vm.define "uf" do |uf|
+    uf.vm.hostname = "splunk-uf"
+
+    uf.vm.synced_folder ".", "/vagrant", disabled: true
+
+    uf.vm.provider "vmware_desktop" do |v|
+      v.cpus = 1
+      v.memory = 1024
+    end
+  end
+end
+
+Vagrant.configure("2") do |config|
+  config.vm.box = BOX_IMAGE
+
+  config.vm.define "cribl" do |cribl|
+    cribl.vm.hostname = "cribl"
+
+    cribl.vm.synced_folder ".", "/vagrant", disabled: true
+
+    cribl.vm.provider "vmware_desktop" do |v|
+      v.cpus = 1
+      v.memory = 1024
+      v.vmx["ethernet0.pcislotnumber"] = "160"
+    end
+  end
+end

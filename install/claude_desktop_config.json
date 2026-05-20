@@ -13,6 +13,16 @@
       "env": {
         "NODE_TLS_REJECT_UNAUTHORIZED": "0"
       }
+    },
+    "cribl-mcp-remote": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "http://localhost:3030/mcp",
+        "--transport",
+        "http-only"
+      ]
     }
   }
 }

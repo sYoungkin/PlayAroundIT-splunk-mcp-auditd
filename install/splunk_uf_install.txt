@@ -1,0 +1,32 @@
+sudo apt update
+sudo apt install -y wget tar
+
+## in /opt
+wget -O splunkforwarder-10.2.3-4d61cf8a5c0c-linux-arm64.tgz "https://download.splunk.com/products/universalforwarder/releases/10.2.3/linux/splunkforwarder-10.2.3-4d61cf8a5c0c-linux-arm64.tgz"
+
+tar -xvzf plunkforwarder-10.2.3-4d61cf8a5c0c-linux-arm64.tgz
+
+sudo /opt/splunkforwarder/bin/splunk enable boot-start --accept-license
+
+
+##### Add configs in /opt/splunkforwarder/etc/system/local/
+
+## inputs.conf
+monitor:///var/log/audit/audit.log]
+index = <splunk_index>
+sourcetype = linux_audit ## make sure to install Splunk TA for Linux on Splunk Enterprise instance
+
+## outputs.conf
+[tcpout]
+defaultGroup = default-autolb-group
+enableOldS2SProtocol = true
+
+[tcpout:default-autolb-group]
+server = <cribl>:9997
+compressed = false
+sendCookedData = true
+
+[tcpout-server://<cribl>:9997]
+
+
+sudo /opt/splunkforwarder/bin/splunk start 
