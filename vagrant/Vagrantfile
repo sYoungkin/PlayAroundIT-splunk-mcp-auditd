@@ -25,6 +25,12 @@ Vagrant.configure("2") do |config|
   config.vm.define "cribl" do |cribl|
     cribl.vm.hostname = "cribl"
 
+    cribl.vm.network "forwarded_port",
+    guest: 9000,
+    host: 9000,
+    host_ip: "127.0.0.1",
+    auto_correct: true
+    
     cribl.vm.synced_folder ".", "/vagrant", disabled: true
 
     cribl.vm.provider "vmware_desktop" do |v|
