@@ -1,0 +1,20 @@
+sudo apt update
+sudo apt install -y wget tar
+
+set-timezone "Europe/Berlin"
+
+sudo apt install -y auditd audispd-plugins
+
+sudo systemctl enable auditd
+sudo systemctl start auditd
+
+## in /opt
+wget -O splunkforwarder-10.2.3-4d61cf8a5c0c-linux-amd64.tgz "https://download.splunk.com/products/universalforwarder/releases/10.2.3/linux/splunkforwarder-10.2.3-4d61cf8a5c0c-linux-amd64.tgz"
+tar -xvzf splunkforwarder-10.2.3-4d61cf8a5c0c-linux-amd64.tgz
+
+sudo /opt/splunkforwarder/bin/splunk enable boot-start --accept-license
+
+
+##### Add configs in /opt/splunkforwarder/etc/system/local/
+
+sudo /opt/splunkforwarder/bin/splunk start 
